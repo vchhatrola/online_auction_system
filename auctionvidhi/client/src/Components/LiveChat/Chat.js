@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import ScrollToBottom from "react-scroll-to-bottom";
 import DisplayNumber from "./DisplayNumber"; 
 
+
 function Chat({ socket, username, room }) {
   const [currentMessage, setCurrentMessage] = useState("");
   const [messageList, setMessageList] = useState([]);
@@ -79,7 +80,9 @@ function Chat({ socket, username, room }) {
             }
           }}
         />
+        
         <button onClick={sendMessage}>&#9658;</button>
+        
       </div>
       <div className="displayed-numbers">
         {enteredNumbers
@@ -88,8 +91,11 @@ function Chat({ socket, username, room }) {
           .map((entry, index) => (
             <DisplayNumber key={index} username={entry.username} number={entry.number} />
           ))}
+         
       </div>
+      
     </div>
+    
   );
 }
 

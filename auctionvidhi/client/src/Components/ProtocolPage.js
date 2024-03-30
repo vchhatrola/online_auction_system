@@ -19,7 +19,7 @@ function ProtocolPage() {
         <li style={{textAlign:'justify'}}><strong>Communicate:</strong> Reach out to support for assistance if needed.</li><br/>
         <li style={{textAlign:'justify'}}><strong>Complete Transaction:</strong> Follow payment and shipping instructions if you win.</li>
       </ol>
-      <Link to="/home" className="ml-2">Home Page</Link>
+      <Link to="/home" className="ml-2">Back</Link>
     </div>
   );
 }

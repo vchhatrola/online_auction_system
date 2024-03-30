@@ -8,6 +8,7 @@ router.post('/createAuction', async (req, res) => {
       title ,
       image,
       price,
+      model,
       description,
       condition,
       auctionDate,
@@ -18,6 +19,7 @@ router.post('/createAuction', async (req, res) => {
       title ,
       image,
       price,
+      model,
       description,
       condition,
       auctionDate,
@@ -25,7 +27,7 @@ router.post('/createAuction', async (req, res) => {
     });
   
     await newAuctionTest.save();
-    return res.json({ status: true, message: 'Action added successfully.' });
+    return res.json({ status: true, message: 'Auction added successfully.' });
   });
   // GET route to fetch all auctions
 router.get('/getAuction', async (req, res) => {

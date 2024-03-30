@@ -2,6 +2,7 @@ import React from 'react';
 import Axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from "react-hook-form"
+import { toast } from 'react-toastify';
 
 const Signup = () => {
     const navigate = useNavigate();
@@ -9,25 +10,14 @@ const Signup = () => {
     const onSubmit = (data) => {
         console.log(data, "data");
         Axios.post("http://localhost:3000/auth/signup", data).then(response => {
+            toast(response.data.message)
             if (response.data.status) {
-                navigate('/login')
+                navigate('/')
             }
         }).catch(err => {
             console.log(err)
         })
-
-        // const handleChange = (e) => {
-        //     // Allow only numeric characters
-        //     const input = e.target.value.replace(/\D/g, '');
-        //     setAdharCardNumber(input);
-        // };
-        // const handleChange1 = (e) => {
-        //     // Allow only numeric characters
-        //     const input = e.target.value.replace(/\D/g, '');
-        //     setPhoneNumber(input);
-        // };
     }
-
     return (
         <div className="container">
             <div className="row justify-content-center">
@@ -69,13 +59,22 @@ const Signup = () => {
                                 </div>
                                 <div className="form-group">
                                     <label htmlFor="phoneNumber">Phone Number</label>
-                                    <input type="text" className="form-control" id="phoneNumber" placeholder="Phone Number" maxLength="10" 
-                                        {...register("phoneNumber", { required: true })} />
-                                    {errors.phoneNumber && <span className="text-danger">This field is required</span>}
+                                    <input type="text" className="form-control"  id="phoneNumber"  placeholder="Phone Number"
+                                        {...register("phoneNumber", 
+                                        {  required: "This field is required", 
+                                            pattern: {
+                                            value: /^[0-9]{10}$/,
+                                            message: "Please enter a 10-digit number."
+                                        } })}
+                                    />
+                                    {errors.phoneNumber && (
+                                        <span className="text-danger">{errors.phoneNumber.message}</span>
+                                    )}
+                                    {/* {errors.phoneNumber && <span className="text-danger">{errors.phoneNumbe.message}</span>} */}
                                 </div>
                                 <div className="form-group">
                                     <label htmlFor="address">Address</label>
-                                    <textarea class="form-control" id="address" rows="3"  {...register("address", { required: true })}></textarea>
+                                    <textarea className="form-control" id="address" rows="3"  {...register("address", { required: true })}></textarea>
                                     {errors.address && <span className="text-danger">This field is required</span>}
                                 </div>
                                 <div className="form-group">
@@ -84,11 +83,25 @@ const Signup = () => {
                                         {...register("registrationDate", { required: true })} />
                                     {errors.registrationDate && <span className="text-danger">This field is required</span>}
                                 </div>
-                                <div className="form-group">
+                                {/* <div className="form-group">
                                     <label htmlFor="adharCardNumber">Adhar Card Number</label>
                                     <input type="text" className="form-control" id="adharCardNumber" placeholder="Adhar Card Number" maxLength="12"
                                         {...register("adharCardNumber", { required: true })} />
                                     {errors.adharCardNumber && <span className="text-danger">This field is required</span>}
+                                </div> */}
+                                <div className="form-group">
+                                    <label htmlFor="adharCardNumber">Adhar Card Number</label>
+                                    <input type="text" className="form-control"  id="adharCardNumber"  placeholder="Adhar Card Number"
+                                        {...register("adharCardNumber", 
+                                        {  required: "This field is required", 
+                                            pattern: {
+                                            value: /^[0-9]{12}$/,
+                                            message: "Please enter a 12-digit number."
+                                        } })}
+                                    />
+                                    {errors.adharCardNumber && (
+                                        <span className="text-danger">{errors.adharCardNumber.message}</span>
+                                    )}
                                 </div>
                                 <div className="form-check">
                                     <input type="checkbox" className="form-check-input" id="exampleCheck1" {...register("termCondition", { required: true })} />

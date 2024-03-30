@@ -10,7 +10,7 @@ function AuctionDetails() {
 
   useEffect(() => {
     axios.get("http://localhost:3000/api/getAuction").then(response => {
-      console.log(response.data,"rrsponse actiondetail")
+      console.log(response.data,"response actiondetail")
             if (response.data) {
                 setAuctionData(response.data.auctions)
             }

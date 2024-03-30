@@ -57,7 +57,7 @@ import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
 import { UserRouter } from './routes/user.route.js';
 import {AuctionRouter} from './routes/auction.route.js';
-
+import {ContactRouter} from './routes/contact.route.js'
 dotenv.config();
 
 const app = express();
@@ -72,6 +72,8 @@ app.use(cors({
 app.use(cookieParser());
 app.use('/auth', UserRouter);
 app.use('/api', AuctionRouter);
+// app.use('/chat',ContactRouter);
+
 
 mongoose.connect('mongodb://127.0.0.1:27017/authentication1');
 

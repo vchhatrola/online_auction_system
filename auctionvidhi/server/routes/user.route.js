@@ -5,6 +5,7 @@ import { User } from '../models/User.js'
 // import {ActionTest} from '../models/ActionDetail.modal.js'
 import jwt from 'jsonwebtoken'
 import nodemailer from 'nodemailer'
+import { ContactUs } from '../models/ContactUs.modal.js';
 
 
 
@@ -136,7 +137,7 @@ router.get('/logout', (req, res) => {
 });
 
 
-router.post("/contact", (req, res) => {
+router.post("/contact",async (req, res) => {
   const name = req.body.name;
   const email = req.body.email;
   const message = req.body.message;
@@ -166,14 +167,20 @@ router.post("/contact", (req, res) => {
       return console.log("Server Running");
     }
   });
+  const newContactUs = new ContactUs({
+    name,
+    email,
+    message 
+  });
+  await newContactUs.save();
 
 
-
-  contactEmail.sendMail(mail, (error) => {
+  contactEmail.sendMail(mail,async (error) => {
     if (error) {
       res.json({ status: "ERROR" });
     } else {
-      res.json({ status: "Message Sent" });
+      
+      res.json({ status: "Your request sent successfully." });
     }
   });
 });
