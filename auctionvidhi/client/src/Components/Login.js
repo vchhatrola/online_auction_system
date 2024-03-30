@@ -4,12 +4,19 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useEffect } from 'react';
  
 const Login = () => {
   const navigate = useNavigate();
   const { register, handleSubmit, formState: { errors } } = useForm();
   Axios.defaults.withCredentials = true;
 
+  useEffect(() => {
+    const isLogedIn= localStorage.getItem("isAuthenticate")
+    if(isLogedIn == "true"){
+      navigate('/home');
+    }
+  }, []);
   const onSubmit = (data) => {
     console.log(data, "data");
     Axios.post("http://localhost:3000/auth/login", data)
