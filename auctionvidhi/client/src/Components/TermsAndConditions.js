@@ -43,8 +43,8 @@ The operators of the System reserve the right to modify these Terms at any time.
 <br/><br/>
 13. Contact Information
 If you have any questions about these Terms, please contact us at [your contact email].</h4>
-<button><Link to="/login">Login page</Link></button><br></br>
-<button><Link to="/Signup">Sign up</Link></button>
+<Link to="/" >Login page</Link><br></br>
+<Link to="/Signup">Sign up</Link>
     </div>
   )
 }

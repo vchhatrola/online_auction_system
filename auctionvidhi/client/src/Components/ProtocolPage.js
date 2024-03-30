@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+
 
 function ProtocolPage() {
   return (
@@ -17,6 +19,7 @@ function ProtocolPage() {
         <li style={{textAlign:'justify'}}><strong>Communicate:</strong> Reach out to support for assistance if needed.</li><br/>
         <li style={{textAlign:'justify'}}><strong>Complete Transaction:</strong> Follow payment and shipping instructions if you win.</li>
       </ol>
+      <Link to="/home" className="ml-2">Home Page</Link>
     </div>
   );
 }

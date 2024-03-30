@@ -32,7 +32,7 @@ const Signup = () => {
         <div className="container">
             <div className="row justify-content-center">
                 <div className="col-md-6">
-                    <div className="card">
+                    <div className="card mt-5">
                         <div className="card-body">
                             <form onSubmit={handleSubmit(onSubmit)}>
                                 <h2 className="text-center mb-4">Sign Up</h2>
@@ -47,7 +47,7 @@ const Signup = () => {
                                     <input type="email" className="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email"
                                         {...register("email", { required: true })} />
                                     {errors.email && <span className="text-danger">This field is required</span>}
-                                    <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
+                                    {/* <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small> */}
                                 </div>
                                 <div className="form-group">
                                     <label htmlFor="password1">Password</label>
@@ -96,7 +96,7 @@ const Signup = () => {
                                     {errors.termCondition && <span className="text-danger">This field is required</span>}
                                 </div>
                                 <button type="submit" className="btn btn-primary mt-3">Submit</button>
-                                <p className="mt-2">Have an account? <Link to="/login">Login</Link></p>
+                                <p className="mt-2">Have an account? <Link to="/">Login</Link></p>
                             </form>
                         </div>
                     </div>

@@ -6,21 +6,21 @@ import { useNavigate, useParams } from 'react-router-dom'
 
 const ResetPassword = () => {
     const [password, setPassword] = useState("")
-    const {token} = useParams()
+    const { token } = useParams()
 
 
     const navigate = useNavigate()
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        Axios.post('http://localhost:3000/auth/reset-password/'+token, {
+        Axios.post('http://localhost:3000/auth/reset-password/' + token, {
 
             password,
 
         }).then(response => {
             //console.log(response)
             if (response.data.status) {
-            
+
                 navigate('/login')
             }
             console.log(response.data)
@@ -32,17 +32,27 @@ const ResetPassword = () => {
 
 
     return (
-        <div className='sign-up-container'>
-
-            <form className='sign-up-form' onSubmit={handleSubmit}>
-                <h2>New Password</h2>
-
-             <label htmlFor="password">Password</label>
-                <input type="password" placeholder='******'
-                    onChange={(e) => setPassword(e.target.value)} />
-                <button type='submit'>Reset</button>
-            </form>
-
+        <div className="container">
+            <div className="row justify-content-center">
+                <div className="col-md-6">
+                    <div className="card mt-5">
+                        <div className="card-body">
+                            <form onSubmit={handleSubmit}>
+                                <h2 className="text-center mb-4">New Password</h2>
+                                {/* <label htmlFor="password">Password</label>
+                                <input type="password" placeholder='******'
+                                    onChange={(e) => setPassword(e.target.value)} /> */}
+                                <div className="form-group">
+                                    <label htmlFor="password">Password</label>
+                                    <input type="password" className="form-control" id="password" placeholder="Password"
+                                        onChange={(e) => setPassword(e.target.value)} />
+                                </div>
+                                <button type='submit' className="btn btn-primary mt-3">Reset</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     )
 }

@@ -1,4 +1,5 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 
 const auctions = [
@@ -117,29 +118,32 @@ const auctions = [
 
 function AuctionDescription() {
   const { id } = useParams();
-  const auction = auctions.find((auction) => auction.id.toString() === id);
+  const [auction, setAuction] = useState([]);
+  const [ID, setId] = useState(id);
+
+  useEffect(() => {
+    axios.get(`http://localhost:3000/api/getAuction/${id}`).then(response => {
+        console.log(response.data, "response actiondetail");
+        if (response.data) {
+          setAuction(response.data.data);
+        }
+    }).catch(err => {
+        console.log(err);
+    });
+},[ID]);
 
   if (!auction) {
     return <div style={{ textAlign: 'center', marginTop: '50px' }}>Auction not found</div>;
   }
-// Number each line in the description
-const formattedDescription = auction.description
-.replace(/\n/g, ' ')
-.split('. ')
-.map((line, index) => (
-  <span key={index}>
-    {index + 1}. {line.trim()}
-    <br />
-  </span>
-));
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center',backgroundColor:'#888B90',fontFamily:'tahoma' }}>
       <h2>{auction.title}</h2>
       <img src={auction.image} alt={auction.title} style={{ width: '400px', height: '300px', objectFit: 'contain' }} />
       <p style={{ fontWeight: 'bold', fontSize: '18px', color: '#212529', textAlign: 'left' }}>Price: {auction.price}</p>
-      <div style={{ textAlign: 'left' }}>
-        <p style={{fontWeight:'bold', textAlign:'left'}}>Description:</p>
-        {formattedDescription}
+      <div style={{ textAlign: 'center' }}>
+        <p style={{fontWeight:'bold', textAlign:'center'}}>Description:</p>
+        {auction.description}
       </div><br/>
       <div style={{ textAlign: 'left' }}>
         <p style={{ fontWeight: 'bold', display: 'inline',textAlign:'justify' }}>Condition:</p>
@@ -147,7 +151,7 @@ const formattedDescription = auction.description
       </div><br/>
       <div style={{ textAlign: 'left' }}>
         <p style={{ fontWeight: 'bold', display: 'inline' }}>Car Model:</p>
-        <p style={{ display: 'inline' }}>{auction.model}</p>
+        <p style={{ display: 'inline' }}>{auction.title}</p>
       </div><br/>
       <div style={{ textAlign: 'left' }}>
         <p style={{ fontWeight: 'bold', display: 'inline' }}>Auction Date:</p>

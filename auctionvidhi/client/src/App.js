@@ -10,22 +10,39 @@ import { AuctionDetails } from './Components/AuctionDetails'
 import AuctionDescription from './Components/AuctionDescription'
 import ProtocolPage from './Components/ProtocolPage'
 import ChatMain from './Components/LiveChat/ChatMain'
+import PrivateRoute from './PrivateRoute'
+import { ToastContainer } from 'react-toastify'
+import PageNotFound from './Components/PageNotFound'
 
 function App() {
   return (
     <BrowserRouter>
+     <ToastContainer
+    autoClose={5000}
+    position="top-right"
+    hideProgressBar={false}
+    newestOnTop={false}
+    closeOnClick
+    rtl={false}
+    pauseOnFocusLoss
+    draggable
+    pauseOnHover
+    theme="light"
+    />
       <Routes>
-        <Route path= '/' element={<Home />}></Route>
-        <Route path="/signup" element={<Signup />}></Route>
-        <Route path="/login" element={<Login />}></Route>
+     
+      <Route path="/signup" element={<Signup />}></Route>
+        <Route path="/" element={<Login />}></Route>
         <Route path="/forgotpassword" element={<Forgotpassword />}></Route>
         <Route path="/resetpassword/:token" element={<ResetPassword />}></Route>
-        <Route path="/contact" element={<Contact/>}></Route>
-        <Route path="/termsandconditions" element={<TermsAndConditions/>}></Route>
-        <Route path="/AuctionDetails" element={<AuctionDetails />} />
-        <Route path="/AuctionDescription/:id" element={<AuctionDescription />} />
-        <Route path="/protocol" element={<ProtocolPage />} />
-      <Route path="/Chat" element={<ChatMain/>}></Route>
+        <Route path= '/home' element={<PrivateRoute><Home /></PrivateRoute>}></Route>
+        <Route path="/contact" element={<PrivateRoute><Contact /></PrivateRoute>}></Route>
+        <Route path="/termsandconditions" element={<PrivateRoute><TermsAndConditions /></PrivateRoute>}></Route>
+        <Route path="/AuctionDetails" element={<PrivateRoute><AuctionDetails /></PrivateRoute>} />
+        <Route path="/AuctionDescription/:id" element={<PrivateRoute><AuctionDescription /></PrivateRoute>} />
+        <Route path="/protocol" element={<PrivateRoute><ProtocolPage /></PrivateRoute>} />
+      <Route path="/Chat" element={<PrivateRoute><ChatMain/></PrivateRoute>}></Route>
+      <Route path="*" element={<PageNotFound />}></Route>
       </Routes>
     </BrowserRouter>
   )

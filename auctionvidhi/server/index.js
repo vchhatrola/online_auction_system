@@ -55,7 +55,8 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
-import { UserRouter } from './routes/user.js';
+import { UserRouter } from './routes/user.route.js';
+import {AuctionRouter} from './routes/auction.route.js';
 
 dotenv.config();
 
@@ -70,6 +71,7 @@ app.use(cors({
 }));
 app.use(cookieParser());
 app.use('/auth', UserRouter);
+app.use('/api', AuctionRouter);
 
 mongoose.connect('mongodb://127.0.0.1:27017/authentication1');
 

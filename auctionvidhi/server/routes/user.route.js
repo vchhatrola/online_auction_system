@@ -2,6 +2,7 @@ import express from 'express'
 import bcrypt from 'bcrypt'
 const router = express.Router();
 import { User } from '../models/User.js'
+// import {ActionTest} from '../models/ActionDetail.modal.js'
 import jwt from 'jsonwebtoken'
 import nodemailer from 'nodemailer'
 
@@ -22,7 +23,7 @@ router.post('/signup', async (req, res) => {
 
   const user = await User.findOne({ email });
   if (user) {
-    return res.json({ message: 'user already existed' });
+    return res.json({ message: 'User already existed.' });
   }
 
   const hashPassword = await bcrypt.hash(password, 10);
@@ -41,24 +42,24 @@ router.post('/signup', async (req, res) => {
   });
 
   await newUser.save();
-  return res.json({ status: true, message: 'record registered' });
+  return res.json({ status: true, message: 'User is register successfully.' });
 });
 
 router.post('/login', async (req, res) => {
   const { email, password } = req.body
   const user = await User.findOne({ email })
   if (!user) {
-    return res.json({ message: "user is not registered" })
+    return res.json({ message: "User is not registered" })
   }
 
   const validPassword = await bcrypt.compare(password, user.password)
   if (!validPassword) {
-    return res.json({ message: "password is incorrect" })
+    return res.json({ message: "Password is incorrect." })
   }
 
   const token = jwt.sign({ username: user.username }, process.env.KEY, { expiresIn: '1h' }) //3h
   res.cookie('token', token, { httpOnly: true, maxAge: 360000 })
-  return res.json({ status: true, message: "login successfully" })
+  return res.json({ status: true, message: "Login is successfully." })
 })
 
 router.post('/forgot-password', async (req, res) => {
@@ -66,7 +67,7 @@ router.post('/forgot-password', async (req, res) => {
   try {
     const user = await User.findOne({ email })
     if (!user) {
-      return res.json({ message: "user not registered" })
+      return res.json({ message: "User is not registered." })
     }
     const token = jwt.sign({ id: user._id }, process.env.KEY, { expiresIn: '5m' })
     var transporter = nodemailer.createTransport({
@@ -176,24 +177,7 @@ router.post("/contact", (req, res) => {
     }
   });
 });
-router.post('/editprofile/:id', async (req, res) => {
-  const { id } = req.params;
-  const { name  } = req.body;
-  try {
-    const user = await User.findById(_id);
-    if (!user) {
-      return res.json("invalid id");
-    }
-    user.name = name;
-    
-  
-    await user.save();
-    return res.json({ status: true, message: "updated profile" });
-  } catch (err) {
-    return res.json("invalid id");
-  }
-});
 
-
-
+ 
 export { router as UserRouter }
+  
