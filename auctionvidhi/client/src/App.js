@@ -16,6 +16,7 @@ import PageNotFound from './Components/PageNotFound'
 import AdminLogin from './Components/Admin/AdminLogin'
 import AdminDashboard from './Components/Admin/AdminDashboard'
 import UserList from './Components/Admin/UserList'
+import ProductList from './Components/Admin/ProductList'
 
 function App() {
   return (
@@ -49,6 +50,7 @@ function App() {
         <Route path="/adminLogin" element={<AdminLogin />}></Route>
         <Route path="/adminDashboard" element={<AdminDashboard />}></Route>
         <Route path="/userList" element={<UserList />}></Route>
+        <Route path="/productList" element={<ProductList />}></Route>
 
       <Route path="/Chat" element={<PrivateRoute><ChatMain/></PrivateRoute>}></Route>
       <Route path="*" element={<PageNotFound />}></Route>

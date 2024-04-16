@@ -8,7 +8,7 @@ import {  toast } from "react-toastify";
 const UserList = () => {
   const [userList, setUserList] = useState([]);
   const [offset, setOffset] = useState(0);
-  const [perPage, setPerPage] = useState(5); // Adjust the number of items per page as needed
+  const [perPage  ] = useState(5); // Adjust the number of items per page as needed
   const [pageCount, setPageCount] = useState(0);
 
   useEffect(() => {
