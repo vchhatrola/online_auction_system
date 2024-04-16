@@ -1,50 +1,62 @@
-//import "../App.css";
-import io from "socket.io-client";
-import { useState } from "react";
-import Chat from "./Chat";
+import React, { useState } from 'react';
+import io from 'socket.io-client';
+import { useForm } from 'react-hook-form';
+import Chat from './Chat';
 
 const socket = io('http://localhost:3000', { transports: ['websocket', 'polling', 'flashsocket'] });
 
-function ChatMain() {
-  const [username, setUsername] = useState("");
-  const [room, setRoom] = useState("");
+const ChatMain = () => {
+
+  const { register, handleSubmit, formState: { errors },getValues } = useForm();
   const [showChat, setShowChat] = useState(false);
 
-  const joinRoom = () => {
-    if (username !== "" && room !== "") {
-      socket.emit("join_room", room);
-      setShowChat(true);
-    }
-  };
-
+  const joinRoom = (data) => {
+         if (data.username !== "" && data.room !== "") {
+                  socket.emit("join_room", data.room);
+                  setShowChat(true);
+              }
+      };
+console.log(getValues('username'),"getValues")
   return (
-    <div className="App">
-      {!showChat ? (
-        <div className="joinChatContainer">
-          <h3>Join A Chat</h3>
-          <input
-            type="text"
-            placeholder="Name..."
-            onChange={(event) => {
-              setUsername(event.target.value);
-            }}
-          />
-          <input
-            type="text"
-            placeholder="Room ID..."
-            onChange={(event) => {
-              setRoom(event.target.value);
-            }}
-          />
-          <button onClick={joinRoom}>Join A Room</button>
+    <div className="container">
+      <div className="row justify-content-center">
+        <div className="col-md-6">
+          <div className="card mt-5">
+            <div className="card-body">
+            {!showChat ? ( <form onSubmit={handleSubmit(joinRoom)}>
+                <h2 className="text-center mb-4">Join A Chat</h2>
+                <div className="form-group">
+                  <label htmlFor="username">Name</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="username"
+                    placeholder="Enter your name"
+                    {...register("username", { required: true })}
+                  />
+                  {errors.username && <span className="text-danger">This field is required</span>}
+                </div>
+                <div className="form-group">
+                  <label htmlFor="room">Room ID</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="room"
+                    placeholder="Enter room ID"
+                    {...register("room", { required: true })}
+                  />
+                  {errors.room && <span className="text-danger">This field is required</span>}
+                </div>
+                <button type="submit" className="btn btn-primary mt-3">Join</button>
+                
+              </form> ) : ( 
+               <Chat socket={socket} username={getValues('username')} room={getValues('room')} />)}
+            </div>
+          </div>
         </div>
-      ) : (
-        <Chat socket={socket} username={username} room={room} />
-      )}
+      </div>
     </div>
-    
   );
-
 }
 
 export default ChatMain;

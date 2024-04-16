@@ -13,6 +13,9 @@ import ChatMain from './Components/LiveChat/ChatMain'
 import PrivateRoute from './PrivateRoute'
 import { ToastContainer } from 'react-toastify'
 import PageNotFound from './Components/PageNotFound'
+import AdminLogin from './Components/Admin/AdminLogin'
+import AdminDashboard from './Components/Admin/AdminDashboard'
+import UserList from './Components/Admin/UserList'
 
 function App() {
   return (
@@ -41,6 +44,12 @@ function App() {
         <Route path="/AuctionDetails" element={<PrivateRoute><AuctionDetails /></PrivateRoute>} />
         <Route path="/AuctionDescription/:id" element={<PrivateRoute><AuctionDescription /></PrivateRoute>} />
         <Route path="/protocol" element={<PrivateRoute><ProtocolPage /></PrivateRoute>} />
+
+        {/* admin route */}
+        <Route path="/adminLogin" element={<AdminLogin />}></Route>
+        <Route path="/adminDashboard" element={<AdminDashboard />}></Route>
+        <Route path="/userList" element={<UserList />}></Route>
+
       <Route path="/Chat" element={<PrivateRoute><ChatMain/></PrivateRoute>}></Route>
       <Route path="*" element={<PageNotFound />}></Route>
       </Routes>

@@ -1,31 +1,31 @@
 import React from 'react';
 import Axios from 'axios';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import {  toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useEffect } from 'react';
  
-const Login = () => {
+const AdminLogin = () => {
   const navigate = useNavigate();
   const { register, handleSubmit, formState: { errors } } = useForm();
   Axios.defaults.withCredentials = true;
 
   useEffect(() => {
-    const isLogedIn= localStorage.getItem("isAuthenticate")
-    if(isLogedIn === "true"){
-      navigate('/home');
-    }
+    const isLogedIn= localStorage.getItem("isAdminAuthenticate")
+    // if(isLogedIn === "true"){
+    //   navigate('/isAdminAuthenticate');
+    // }
   }, ); //}, []);
   const onSubmit = (data) => {
     console.log(data, "data");
-    Axios.post("http://localhost:3000/auth/login", data)
+    Axios.post("http://localhost:3000/admin/Adminlogin", data)
       .then(response => {
         console.log(response.data,"response")
         toast(response.data.message);
         if (response.data.status) {
-          localStorage.setItem("isAuthenticate",true)
-          navigate('/home');
+          localStorage.setItem("isAdminAuthenticate",true)
+          navigate('/AdminDashboard');
         }
       })
       .catch(err => {
@@ -41,7 +41,7 @@ const Login = () => {
           <div className="card mt-5">
             <div className="card-body">
               <form onSubmit={handleSubmit(onSubmit)}>
-                <h2 className="text-center mb-4">Login</h2>
+                <h2 className="text-center mb-4">Admin Login</h2>
                 <div className="form-group mb-2">
                   <label htmlFor="exampleInputEmail1">Email address</label>
                   <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"
@@ -55,15 +55,8 @@ const Login = () => {
                     {...register("password", { required: true })} />
                   {errors.password && <span className="text-danger">This field is required</span>}
                 </div>
-                <div className="form-check mb-2">
-                  <input type="checkbox" className="form-check-input" id="exampleCheck1" {...register("termCondition", { required: true })} />
-                  <label className="form-check-label" htmlFor="exampleCheck1" > I agree <Link to="/termsandconditions">terms and conditions</Link></label>
-
-                </div>
-                {errors.termCondition && <span className="text-danger">This field is required</span>}
-                <button type="submit" className="btn btn-primary mt-3 mb-2">Submit</button> {/* Adjusted margin top */}
-                <Link to="/forgotpassword" className="ml-2">Forgot password?</Link> {/* Added margin left */}
-                <p className="mt-2">Don't have an account? <Link to="/signup">Sign up</Link></p> {/* Adjusted margin top */}
+                 <button type="submit" className="btn btn-primary mt-3 mb-3">Submit</button> 
+                
               </form>
             </div>
           </div>
@@ -73,4 +66,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default AdminLogin

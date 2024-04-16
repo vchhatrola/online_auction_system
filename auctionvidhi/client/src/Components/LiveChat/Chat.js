@@ -85,14 +85,24 @@ function Chat({ socket, username, room }) {
         
       </div>
       <div className="displayed-numbers">
+        price:
         {enteredNumbers
           .flatMap(entry => entry.numbers.map(number => ({ username: entry.username, number })))
           .sort((a, b) => b.number - a.number) 
           .map((entry, index) => (
             <DisplayNumber key={index} username={entry.username} number={entry.number} />
+            
           ))}
          
+      </div><br></br>
+      <div>
+        <p className="display-name">Name:{username}</p>
       </div>
+      <div style={{ display: 'flex', flexDirection: 'row' }}>
+  <p style={{ marginRight: '50px' }}>payment</p> 
+  <p>exit</p>
+</div>
+
       
     </div>
     
@@ -100,3 +110,4 @@ function Chat({ socket, username, room }) {
 }
 
 export default Chat;
+
