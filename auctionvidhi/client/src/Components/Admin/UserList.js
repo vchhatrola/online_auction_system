@@ -51,7 +51,6 @@ const fetchuser =()=>{
   return (
     <div className="container-fluid admin">
       <div className="row">
-        {/* Sidebar Component */}
         <div className="col-lg-3">
         <AdminSidebar />
         </div>
@@ -87,7 +86,6 @@ const fetchuser =()=>{
                   <td>{user.address}</td>
                   <td>{user.adharCardNumber}</td>
                   <td><img src={DeleteIcon} style={{"width":"1rem"}} onClick={()=>deleteUser(user._id)}></img></td>
-                  {/* <td><img src={DeleteIcon} /></td> */}
                 </tr>)
               }) : (
                 <tr>

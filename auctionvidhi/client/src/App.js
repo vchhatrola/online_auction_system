@@ -17,6 +17,8 @@ import AdminLogin from './Components/Admin/AdminLogin'
 import AdminDashboard from './Components/Admin/AdminDashboard'
 import UserList from './Components/Admin/UserList'
 import ProductList from './Components/Admin/ProductList'
+import Exit from './Components/LiveChat/Exit'
+import Payment from './Components/LiveChat/Payment'
 
 function App() {
   return (
@@ -53,6 +55,9 @@ function App() {
         <Route path="/productList" element={<ProductList />}></Route>
 
       <Route path="/Chat" element={<PrivateRoute><ChatMain/></PrivateRoute>}></Route>
+      <Route path="/Exit" element={<PrivateRoute><Exit/></PrivateRoute>}></Route>
+      <Route path="/Payment" element={<PrivateRoute><Payment/></PrivateRoute>}></Route>
+
       <Route path="*" element={<PageNotFound />}></Route>
       </Routes>
     </BrowserRouter>

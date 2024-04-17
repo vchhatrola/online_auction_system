@@ -1,9 +1,6 @@
-import axios from 'axios'; // Make sure to import axios, not Axios
+import axios from 'axios'; 
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-
-
-
 
 function AuctionDetails() {
   const [auctionData, setAuctionData] = useState([]);
@@ -23,14 +20,14 @@ function AuctionDetails() {
      style={{
       flexWrap: 'wrap',
       justifyContent: 'space-around',
-      backgroundImage: 'url("")', // Add the path to your background image
-      backgroundSize: '0px', // Adjust as needed
-      boxShadow: '0 4px 4px rgba(0, 0, 0, 0.1)', // Add box shadow
+      backgroundImage: 'url("")', 
+      backgroundSize: '0px', 
+      boxShadow: '0 4px 4px rgba(0, 0, 0, 0.1)', 
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
     }}
-  >
+  >     <h3>Auction List</h3>
       {auctionData ? auctionData.map((auction) => (
         <div key={auction._id} style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', borderBottom: '3px solid black', paddingBottom: '20px', marginBottom: '0px',fontFamily:'tahoma' }}>
           <h3>{auction.title}</h3>
@@ -65,7 +62,8 @@ function AuctionDetails() {
       )):<div>No Auction Found.</div>}
       
     </div>
-  );
+ );
+
 }
 
 export { AuctionDetails };

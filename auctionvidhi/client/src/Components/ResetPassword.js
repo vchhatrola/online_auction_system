@@ -39,9 +39,6 @@ const ResetPassword = () => {
                         <div className="card-body">
                             <form onSubmit={handleSubmit}>
                                 <h2 className="text-center mb-4">New Password</h2>
-                                {/* <label htmlFor="password">Password</label>
-                                <input type="password" placeholder='******'
-                                    onChange={(e) => setPassword(e.target.value)} /> */}
                                 <div className="form-group">
                                     <label htmlFor="password">Password</label>
                                     <input type="password" className="form-control" id="password" placeholder="Password"

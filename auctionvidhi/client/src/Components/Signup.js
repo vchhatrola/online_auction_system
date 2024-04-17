@@ -37,7 +37,6 @@ const Signup = () => {
                                     <input type="email" className="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email"
                                         {...register("email", { required: true })} />
                                     {errors.email && <span className="text-danger">This field is required</span>}
-                                    {/* <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small> */}
                                 </div>
                                 <div className="form-group">
                                     <label htmlFor="password1">Password</label>
@@ -70,7 +69,6 @@ const Signup = () => {
                                     {errors.phoneNumber && (
                                         <span className="text-danger">{errors.phoneNumber.message}</span>
                                     )}
-                                    {/* {errors.phoneNumber && <span className="text-danger">{errors.phoneNumbe.message}</span>} */}
                                 </div>
                                 <div className="form-group">
                                     <label htmlFor="address">Address</label>
@@ -83,12 +81,6 @@ const Signup = () => {
                                         {...register("registrationDate", { required: true })} />
                                     {errors.registrationDate && <span className="text-danger">This field is required</span>}
                                 </div>
-                                {/* <div className="form-group">
-                                    <label htmlFor="adharCardNumber">Adhar Card Number</label>
-                                    <input type="text" className="form-control" id="adharCardNumber" placeholder="Adhar Card Number" maxLength="12"
-                                        {...register("adharCardNumber", { required: true })} />
-                                    {errors.adharCardNumber && <span className="text-danger">This field is required</span>}
-                                </div> */}
                                 <div className="form-group">
                                     <label htmlFor="adharCardNumber">Adhar Card Number</label>
                                     <input type="text" className="form-control"  id="adharCardNumber"  placeholder="Adhar Card Number"

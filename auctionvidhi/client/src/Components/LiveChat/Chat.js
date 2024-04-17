@@ -1,7 +1,8 @@
 
 import React, { useEffect, useState } from "react";
 import ScrollToBottom from "react-scroll-to-bottom";
-import DisplayNumber from "./DisplayNumber"; 
+import DisplayNumber from "./DisplayNumber";
+import { Link } from "react-router-dom";
 
 
 function Chat({ socket, username, room }) {
@@ -36,10 +37,10 @@ function Chat({ socket, username, room }) {
         setEnteredNumbers((prevNumbers) => [...prevNumbers, { username: data.author, numbers }]);
       }
     });
-    
+
     return () => {
-          socket.disconnect(); 
-        };
+      socket.disconnect();
+    };
   }, [socket]);
 
   return (
@@ -80,32 +81,33 @@ function Chat({ socket, username, room }) {
             }
           }}
         />
-        
+
         <button onClick={sendMessage}>&#9658;</button>
-        
+
       </div>
-      <div className="displayed-numbers">
+
+      {/* <div className="displayed-numbers"> */}
+      <div style={{ position: 'fixed', top: 0, right: 0, width: '150px', padding: '10px', backgroundColor: '#fff', zIndex: 1000 }}>
+
+        Name:{username}<br />
         price:
         {enteredNumbers
           .flatMap(entry => entry.numbers.map(number => ({ username: entry.username, number })))
-          .sort((a, b) => b.number - a.number) 
+          .sort((a, b) => b.number - a.number)
           .map((entry, index) => (
             <DisplayNumber key={index} username={entry.username} number={entry.number} />
-            
           ))}
-         
-      </div><br></br>
-      <div>
-        <p className="display-name">Name:{username}</p>
-      </div>
-      <div style={{ display: 'flex', flexDirection: 'row' }}>
-  <p style={{ marginRight: '50px' }}>payment</p> 
-  <p>exit</p>
-</div>
 
-      
+      </div><br></br>
+
+      <div style={{ display: 'flex', flexDirection: 'row' }}>
+        <p style={{ marginRight: '50px' }}><Link to="/Payment">Payment</Link></p>
+        <Link to="/Exit">Exit</Link>
+      </div>
+
+
     </div>
-    
+
   );
 }
 

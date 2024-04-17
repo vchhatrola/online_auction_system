@@ -4,8 +4,6 @@ import { Link,useLocation } from 'react-router-dom';
 function AdminSidebar() {
     const location = useLocation();
     const [activeLink, setActiveLink] = useState(location.pathname);
-  
-    // Function to handle link click
     const handleLinkClick = (link) => {
       setActiveLink(link);
     };

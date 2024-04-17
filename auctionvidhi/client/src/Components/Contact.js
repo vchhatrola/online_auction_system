@@ -5,19 +5,11 @@ import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
-
 const Contact = () => {
     const [status, setStatus] = useState("Submit");
-    const { register, handleSubmit,reset, formState: { errors } } = useForm();
+    const { register, handleSubmit, reset, formState: { errors } } = useForm();
     const onSubmit = async (data) => {
-        // e.preventDefault();
         setStatus("Sending...");
-        // const { name, email, message } = e.target.elements;
-        // let details = {
-        //     name: name.value,
-        //     email: email.value,
-        //     message: message.value,
-        // };
         let response = await fetch("http://localhost:3000/auth/contact", {
             method: "POST",
             headers: {
@@ -33,21 +25,6 @@ const Contact = () => {
     };
 
     return (
-        // <div className='sign-up-container'>
-        //     <form className='sign-up-form' onSubmit={handleSubmit}>
-        //         <h2>Contact Us</h2>
-        //         <label htmlFor="name">Name:</label>
-        //         <input type="text" id="name" required placeholder='name' />
-
-        //         <label htmlFor="email">Email:</label>
-        //         <input type="email" id="email" required placeholder='Email'/>
-
-        //         <label htmlFor="message">Message:</label>
-        //         <textarea id="message" required placeholder='massage'/>
-
-        //         <button type="submit">{status}...Submit</button>
-        //     </form>
-        // </div>
         <div className="container">
             <div className="row justify-content-center">
                 <div className="col-md-6">

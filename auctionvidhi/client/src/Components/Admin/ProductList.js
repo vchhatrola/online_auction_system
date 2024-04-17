@@ -3,7 +3,7 @@ import AdminSidebar from './AdminSidebar'
 import axios from 'axios';
 import DeleteIcon from '../../images/deleteIcon.png'
 import ReactPaginate from 'react-paginate';
-import {  toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 const ProductList = () => {
   const [productListdata, setProductList] = useState([]);
@@ -14,8 +14,8 @@ const ProductList = () => {
   useEffect(() => {
     fetchproduct()
   }, [offset, perPage]);
-const fetchproduct =()=>{
-  axios.get(`http://localhost:3000/api/getAuction`).then(response => {
+  const fetchproduct = () => {
+    axios.get(`http://localhost:3000/api/getAuction`).then(response => {
       console.log(response.data, "response ");
       if (response.data) {
         const data = response.data.auctions;
@@ -26,7 +26,7 @@ const fetchproduct =()=>{
     }).catch(err => {
       console.log(err);
     });
-}
+  }
   const handlePageClick = (e) => {
     const selectedPage = e.selected;
     setOffset(selectedPage * perPage);
@@ -35,8 +35,8 @@ const fetchproduct =()=>{
   const calculateRowNumber = (index) => {
     return offset + index + 1;
   };
-  const deleteProduct =(id)=>{
-    console.log(id,"delete id")
+  const deleteProduct = (id) => {
+    console.log(id, "delete id")
     axios.get(`http://localhost:3000/api/deleteAuction/${id}`).then(response => {
       console.log(response.data, "response ");
       if (response.data) {
@@ -47,11 +47,11 @@ const fetchproduct =()=>{
       console.log(err);
     });
   }
- 
+
   return (
     <div className="container-fluid admin">
       <div className="row">
-        {/* Sidebar Component */}
+
         <div className="col-lg-3">
           <AdminSidebar />
         </div>
@@ -67,7 +67,6 @@ const fetchproduct =()=>{
                   <th scope="col">Image</th>
                   <th scope="col">Price</th>
                   <th scope="col">Model</th>
-                  <th scope="col">Description</th>
                   <th scope="col">Condition</th>
                   <th scope="col">AuctionDate</th>
                   <th scope="col">AuctionTime</th>
@@ -82,7 +81,6 @@ const fetchproduct =()=>{
                     <td><img src={product.image} style={{ "width": "4rem" }} /></td>
                     <td>{product.price}</td>
                     <td>{product.model}</td>
-                    <td>{product.description}</td>
                     <td>{product.condition}</td>
                     <td>{product.auctionDate}</td>
                     <td>{product.auctionTime}</td>

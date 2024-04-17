@@ -13,10 +13,7 @@ const AdminLogin = () => {
 
   useEffect(() => {
     const isLogedIn= localStorage.getItem("isAdminAuthenticate")
-    // if(isLogedIn === "true"){
-    //   navigate('/isAdminAuthenticate');
-    // }
-  }, ); //}, []);
+   }, ); 
   const onSubmit = (data) => {
     console.log(data, "data");
     Axios.post("http://localhost:3000/admin/Adminlogin", data)
@@ -47,7 +44,6 @@ const AdminLogin = () => {
                   <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"
                     {...register("email", { required: true })} />
                   {errors.email && <span className="text-danger">This field is required</span>}
-                  {/* <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small> */}
                 </div>
                 <div className="form-group mb-2">
                   <label htmlFor="exampleInputPassword1">Password</label>
