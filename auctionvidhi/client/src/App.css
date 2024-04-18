@@ -40,7 +40,7 @@ lable {
 .container .btn{
     width: 100%;
     padding: 10px;
-    background-color: #3498db;
+    background-color: #111212;
     color: #fff;
     border: none;
     border-radius: 4px;
@@ -49,16 +49,16 @@ lable {
 .container .button1{
     width: 10%;
     padding: 10px;
-    background-color: #3498db;
+    background-color: #090a0a;
     color: #fff;
     border: none;
     border-radius: 4px;
     cursor: pointer;
 }
-
-button:hover{
-    background-color: #2980b9;
+.custom-icon {
+  background-color: black;
 }
+
 
 .App {
     width: 100vw;

@@ -3,14 +3,14 @@ import io from 'socket.io-client';
 import Axios from 'axios';
 import { useForm } from 'react-hook-form';
 import Chat from './Chat';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 const socket = io('http://localhost:3000', { transports: ['websocket', 'polling', 'flashsocket'] });
 
 const ChatMain = () => {
   let userDetail = JSON.parse(localStorage.getItem("user"))
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const { register, handleSubmit, formState: { errors }, getValues } = useForm();
   const [showChat, setShowChat] = useState(false);
 

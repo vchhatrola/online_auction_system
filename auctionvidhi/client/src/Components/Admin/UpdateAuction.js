@@ -2,7 +2,7 @@
 import axios from 'axios';
 import React, {  useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { Navigate, useParams } from 'react-router-dom';
+import { Link, Navigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 const UpdateAuction = () => {
@@ -93,6 +93,7 @@ const UpdateAuction = () => {
                                     {errors.auctionDate && <span className="text-danger">This field is required</span>}
                                 </div>
                                 <button type="submit" className="btn btn-primary mt-3">Submit</button>
+                                <Link to="/productList">back</Link>
                             </form>
                         </div>
                     </div>

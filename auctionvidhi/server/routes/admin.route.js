@@ -63,7 +63,6 @@ router.post('/auctionBid', async (req, res) => {
 });
 
 router.get('/totalCount', async (req, res) => {
-  console.log("hiiii...")
   try {
     const totalUsers = await User.countDocuments();
     const totalAuction= await AuctionTest.countDocuments();

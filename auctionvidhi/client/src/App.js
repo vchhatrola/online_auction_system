@@ -43,10 +43,12 @@ function App() {
         <Route path="/" element={<Login />}></Route>
         <Route path="/forgotpassword" element={<Forgotpassword />}></Route>
         <Route path="/resetpassword/:token" element={<ResetPassword />}></Route>
+        <Route path="/termsandconditions" element={<TermsAndConditions />}></Route>
+
         <Route path='/home' element={<PrivateRoute><Home /></PrivateRoute>}></Route>
         <Route path="/contact" element={<PrivateRoute><Contact /></PrivateRoute>}></Route>
         {/* <Route path="/EditProfile/:id" element={<PrivateRoute><EditProfile /></PrivateRoute>}></Route> */}
-        <Route path="/termsandconditions" element={<PrivateRoute><TermsAndConditions /></PrivateRoute>}></Route>
+        {/* <Route path="/termsandconditions" element={<PrivateRoute><TermsAndConditions /></PrivateRoute>}></Route> */}
         <Route path="/AuctionDetails" element={<PrivateRoute><AuctionDetails /></PrivateRoute>} />
         <Route path="/AuctionDescription/:id" element={<PrivateRoute><AuctionDescription /></PrivateRoute>} />
         <Route path="/protocol" element={<PrivateRoute><ProtocolPage /></PrivateRoute>} />

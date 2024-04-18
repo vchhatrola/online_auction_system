@@ -56,11 +56,10 @@ const fetchuser =()=>{
         </div>
        
         {/* Main Content */}
-        <div className="col-lg-9">
-          <h1>User List </h1>
-          <p>This is the user List.</p>
+        <div className="col-lg-9 mb-5 mt-3">
+          <h1 >User List </h1>
           <div className="table-responsive">
-          <table className="table table-striped">
+          <table className="table table-striped mb-4">
             <thead>
               <tr>
                 <th scope="col">No</th>

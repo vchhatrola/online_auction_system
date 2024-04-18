@@ -9,7 +9,8 @@ const AuctionTestSchema = new mongoose.Schema({
   description: { type: String,required: false},
   condition: { type: String, required: true },
   auctionDate: { type: Date, required: true },
-  auctionTime: { type: String, required: true }
+  auctionTime: { type: String, required: true },
+  images: [{ type: mongoose.Schema.Types.ObjectId, ref: 'AuctionImage' }]
  
 });
 

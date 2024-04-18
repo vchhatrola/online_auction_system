@@ -1,6 +1,8 @@
 import express from 'express'
 const router = express.Router();
 import { AuctionTest } from '../models/AuctionDetail.modal.js'
+import { AuctionImage } from '../models/AuctionImage.model.js'
+import  { Mongoose }  from 'mongoose';
 
 router.post('/createAuction', async (req, res) => {
   console.log(req.body, "req..")
@@ -53,7 +55,26 @@ router.get('/deleteAuction/:id', async (req, res) => {
 
 router.get('/getAuction/:id', async (req, res) => {
   try {
-    const auction = await AuctionTest.findById(req.params.id);
+    const moongoos = new Mongoose()
+    let query=[{
+      $match:{
+        _id: new moongoos.Types.ObjectId(req.params.id)
+      }
+    },
+    {
+      $lookup:
+        {
+          from: "auctionimages",
+          localField: "_id",
+          foreignField: "auction",
+          as: "imageData"
+        }
+   }
+    ]
+    console.log(query)
+    // const auction = await AuctionTest.findById(req.params.id).populate('images');
+    const auction = await AuctionTest.aggregate(query);
+
     if (!auction) {
       return res.status(404).json({ status: false, message: 'Auction not found.' });
     }
@@ -91,6 +112,23 @@ router.post('/updateAuction/:id', async (req, res) => {
   } catch (error) {
     return res.status(500).json({ status: false, message: 'Failed to update auction.', error: error.message });
   }
+});
+
+
+router.post('/createAuctionImage', async (req, res) => {
+  console.log(req.body, "req..")
+  const {
+    auction,
+    image,
+  } = req.body;
+
+  const newAuctionImage = new AuctionImage({
+    auction,
+    image,
+  });
+
+  await newAuctionImage.save();
+  return res.json({ status: true, message: 'AuctionImage  added successfully.' });
 });
 
 export { router as AuctionRouter }

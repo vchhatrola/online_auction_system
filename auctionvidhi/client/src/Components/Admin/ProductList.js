@@ -70,11 +70,10 @@ const ProductList = () => {
         <div className="col-lg-3">
           <AdminSidebar />
         </div>
-        <div className="col-lg-9">
+        <div className="col-lg-9 mb-5 mt-3">
           <h1>Product List </h1>
-          <p>This is the product List.</p>
           <div className="table-responsive">
-            <table className="table table-striped">
+            <table className="table table-striped mb-4">
               <thead>
                 <tr>
                   <th scope="col">No</th>
