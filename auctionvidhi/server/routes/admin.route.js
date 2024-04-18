@@ -1,6 +1,7 @@
 import express from 'express'
 const router = express.Router();
 import { Admin } from '../models/Admin.modal.js'
+import { AuctionTest } from '../models/AuctionDetail.modal.js'
 import { AuctionBid } from '../models/AuctionBid.modal.js'
 import { User } from '../models/User.js'
 import jwt from 'jsonwebtoken'
@@ -61,6 +62,17 @@ router.post('/auctionBid', async (req, res) => {
   return res.json({ status: true, message: 'auctionBid is submited.' });
 });
 
+router.get('/totalCount', async (req, res) => {
+  console.log("hiiii...")
+  try {
+    const totalUsers = await User.countDocuments();
+    const totalAuction= await AuctionTest.countDocuments();
+    const totalAuctionBid= await AuctionBid.countDocuments();
+    return res.json({ status: true, totalCount: {totalUsers:totalUsers,totalAuction:totalAuction,totalAuctionBid:totalAuctionBid} });
+  } catch (error) {
+    return res.status(500).json({ status: false, message: 'Failed to fetch total users.', error: error.message });
+  }
+});
 
 
 export { router as AdminRouter }
