@@ -32,17 +32,17 @@ const Contact = () => {
                         <div className="card-body">
                             <form onSubmit={handleSubmit(onSubmit)}>
                                 <h2 className="text-center mb-4">Contact Us</h2>
-                                <div className="form-group">
+                                <div className="form-group  mb-2">
                                     <label htmlFor="name">Name</label>
                                     <input type="text" className="form-control" id="name" placeholder="Name" {...register("name", { required: true })} />
                                     {errors.name && <span className="text-danger">This field is required</span>}
                                 </div>
-                                <div className="form-group">
+                                <div className="form-group  mb-2">
                                     <label htmlFor="email">Email</label>
                                     <input type="text" className="form-control" id="email" placeholder="Email" {...register("email", { required: true })} />
                                     {errors.email && <span className="text-danger">This field is required</span>}
                                 </div>
-                                <div className="form-group">
+                                <div className="form-group  mb-2">
                                     <label htmlFor="message">Message</label>
                                     <textarea className="form-control" id="message" rows="3"   {...register("message", { required: true })} ></textarea>
                                     {errors.message && <span className="text-danger">This field is required</span>}

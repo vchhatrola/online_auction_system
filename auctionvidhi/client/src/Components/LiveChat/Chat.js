@@ -2,6 +2,8 @@
 import React, { useEffect, useState } from "react";
 import ScrollToBottom from "react-scroll-to-bottom";
 import DisplayNumber from "./DisplayNumber";
+import Axios from 'axios';
+import { toast } from 'react-toastify';
 import { Link } from "react-router-dom";
 
 
@@ -33,6 +35,45 @@ function Chat({ socket, username, room }) {
       setMessageList((list) => [...list, data]);
 
       const numbers = data.message.match(/\b\d+\b/g);
+      console.log(data.message, " data.message")
+      // Define regex patterns
+      const finalPattern = /final/i; // Case-insensitive match for "final"
+      const usernamePattern = /username/i; // Case-insensitive match for "username"
+      const pricePattern = /price\s*=\s*\d+/; // Match for "price = <number>"
+
+      // Check if the message contains the patterns
+      const containsFinal = finalPattern.test(data.message);
+      const containsUsername = usernamePattern.test(data.message);
+      const containsPrice = pricePattern.test(data.message);
+    if(containsFinal && containsUsername && containsPrice){
+
+      const usernamePattern = /username\s*=\s*(\S+)/i; // Capture the username value
+      const pricePattern = /price\s*=\s*(\d+)/; // Capture the price value
+
+      // Extract username and price from the message
+      const usernameMatch = data.message.match(usernamePattern);
+      const priceMatch = data.message.match(pricePattern);
+
+      // Check if the patterns matched and extract the values
+      const username = usernameMatch ? usernameMatch[1] : null;
+      const price = priceMatch ? parseInt(priceMatch[1]) : null;
+      let auctionId = localStorage.getItem("auctionId")
+      const params ={username,price,auctionId,isSell:true}
+      Axios.post("http://localhost:3000/admin/auctionBid", params).then(response => {
+        toast(response.data.message)
+        if (response.data.status) {
+        }
+      }).catch(err => {
+        console.log(err)
+      })
+    }
+      // // Output the results
+      // console.log("Contains 'final':", containsFinal);
+      // console.log("Contains 'username':", containsUsername);
+      // console.log("Contains 'price':", containsPrice);
+
+
+
       if (numbers) {
         setEnteredNumbers((prevNumbers) => [...prevNumbers, { username: data.author, numbers }]);
       }

@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react'
 import AdminSidebar from './AdminSidebar'
 import axios from 'axios';
 import DeleteIcon from '../../images/deleteIcon.png'
+import UpadteIcon from '../../images/updateIcon.png'
 import ReactPaginate from 'react-paginate';
 import { toast } from "react-toastify";
+import { Link } from 'react-router-dom';
 
 const ProductList = () => {
   const [productListdata, setProductList] = useState([]);
@@ -48,6 +50,19 @@ const ProductList = () => {
     });
   }
 
+  // const upadteProduct = (id) => {
+    
+  //   axios.get(`http://localhost:3000/api/updateAuction/${id}`).then(response => {
+  //     console.log(response.data, "response ");
+  //     if (response.data) {
+  //       toast.success(response.data.message)
+  //       fetchproduct();
+  //     }
+  //   }).catch(err => {
+  //     console.log(err);
+  //   });
+  // }
+
   return (
     <div className="container-fluid admin">
       <div className="row">
@@ -71,6 +86,7 @@ const ProductList = () => {
                   <th scope="col">AuctionDate</th>
                   <th scope="col">AuctionTime</th>
                   <th scope="col">Delete</th>
+                  <th scope="col">Edit</th>
                 </tr>
               </thead>
               <tbody>
@@ -85,6 +101,16 @@ const ProductList = () => {
                     <td>{product.auctionDate}</td>
                     <td>{product.auctionTime}</td>
                     <td><img src={DeleteIcon} style={{ "width": "1rem" }} onClick={() => deleteProduct(product._id)}></img></td>
+                    {/* <td><Link to="/updateAuction/${product._id}"><img src={UpadteIcon} style={{ "width": "1rem" }}></img></Link></td> */}
+                    {/* <td><Link to="/updateAuction"><img src={UpadteIcon} style={{ "width": "1rem" }}></img></Link></td> */}
+                    <td>
+    {/* Link to the update product page using the UpdateIcon */}
+    <Link to={`/updateAuction/${product._id}`}>
+        <img src={UpadteIcon} style={{ width: '1rem' }} alt="Update Icon" />
+    </Link>
+</td>
+
+
                   </tr>)
                 }) : (
                   <tr>

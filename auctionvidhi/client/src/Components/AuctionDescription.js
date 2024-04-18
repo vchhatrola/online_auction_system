@@ -11,6 +11,7 @@ function AuctionDescription() {
   const [redirectToChat, setRedirectToChat] = useState(false);
 
   useEffect(() => {
+    localStorage.setItem("auctionId",id)
     axios.get(`http://localhost:3000/api/getAuction/${id}`)
       .then(response => {
         console.log(response.data, "response auction detail");
@@ -33,9 +34,10 @@ function AuctionDescription() {
     console.log(currentDay, "current date", auctionDay, "auction date");
 
     if (auctionDay < currentDay) {
-      toast.error('This auction has ended!');
+      toast('This auction has ended!');
     } else if (auctionDay > currentDay) {
-      toast.info('This auction is upcoming!');
+      toast('This auction is upcoming!');
+
     } else {
       setRedirectToChat(true);
     }

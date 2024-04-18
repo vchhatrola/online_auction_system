@@ -24,6 +24,9 @@ const Login = () => {
         console.log(response.data,"response")
         toast(response.data.message);
         if (response.data.status) {
+          console.log(response.data)
+          localStorage.setItem("user",JSON.stringify(response.data.user))
+          localStorage.setItem("token",response.data.token)
           localStorage.setItem("isAuthenticate",true)
           navigate('/home');
         }
@@ -47,7 +50,7 @@ const Login = () => {
                   <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"
                     {...register("email", { required: true })} />
                   {errors.email && <span className="text-danger">This field is required</span>}
-                  {/* <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small> */}
+                  
                 </div>
                 <div className="form-group mb-2">
                   <label htmlFor="exampleInputPassword1">Password</label>
@@ -61,9 +64,9 @@ const Login = () => {
 
                 </div>
                 {errors.termCondition && <span className="text-danger">This field is required</span>}
-                <button type="submit" className="btn btn-primary mt-3 mb-2">Submit</button> {/* Adjusted margin top */}
-                <Link to="/forgotpassword" className="ml-2">Forgot password?</Link> {/* Added margin left */}
-                <p className="mt-2">Don't have an account? <Link to="/signup">Sign up</Link></p> {/* Adjusted margin top */}
+                <button type="submit" className="btn btn-primary mt-3 mb-2">Submit</button> 
+                <Link to="/forgotpassword" className="ml-2">Forgot password?</Link> 
+                <p className="mt-2">Don't have an account? <Link to="/signup">Sign up</Link></p> 
               </form>
             </div>
           </div>

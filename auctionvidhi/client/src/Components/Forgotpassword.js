@@ -37,7 +37,7 @@ const Forgotpassword = () => {
                         <div className="card-body">
                             <form onSubmit={handleSubmit}>
                                 <h2 className="text-center mb-4">Forgot Password</h2>
-                                <div className="form-group">
+                                <div className="form-group  mb-2">
                                     <label htmlFor="email">Email</label>
                                     <input type="text" className="form-control" id="email" placeholder="Email"
                                      onChange={(e) => setEmail(e.target.value)} />

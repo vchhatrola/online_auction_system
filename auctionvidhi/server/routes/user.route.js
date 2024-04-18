@@ -2,12 +2,9 @@ import express from 'express'
 import bcrypt from 'bcrypt'
 const router = express.Router();
 import { User } from '../models/User.js'
-// import {ActionTest} from '../models/ActionDetail.modal.js'
 import jwt from 'jsonwebtoken'
 import nodemailer from 'nodemailer'
 import { ContactUs } from '../models/ContactUs.modal.js';
-
-
 
 router.post('/signup', async (req, res) => {
   const {
@@ -19,7 +16,7 @@ router.post('/signup', async (req, res) => {
     phoneNumber,
     address,
     adharCardNumber,
-
+    role
   } = req.body;
 
   const user = await User.findOne({ email });
@@ -39,7 +36,7 @@ router.post('/signup', async (req, res) => {
     address,
     registrationDate: new Date(),
     adharCardNumber,
-
+    role
   });
 
   await newUser.save();
@@ -58,9 +55,19 @@ router.post('/login', async (req, res) => {
     return res.json({ message: "Password is incorrect." })
   }
 
-  const token = jwt.sign({ username: user.username }, process.env.KEY, { expiresIn: '1h' }) //3h
+  const token = jwt.sign({ username: user.username }, process.env.KEY, { expiresIn: '12h' })
   res.cookie('token', token, { httpOnly: true, maxAge: 360000 })
-  return res.json({ status: true, message: "Login is successfully." })
+  return res.json({ status: true, token: token, user: user, message: "Login is successfully." })
+})
+
+router.post('/chatJoin', async (req, res) => {
+  const { username, _id } = req.body
+  const user = await User.findOne({ username, _id })
+  if (!user) {
+    return res.json({ message: "User is not registered" })
+  }
+
+  return res.json({ status: true, user: user, message: "Login is successfully." })
 })
 
 router.post('/forgot-password', async (req, res) => {
@@ -137,7 +144,7 @@ router.get('/logout', (req, res) => {
 });
 
 
-router.post("/contact",async (req, res) => {
+router.post("/contact", async (req, res) => {
   const name = req.body.name;
   const email = req.body.email;
   const message = req.body.message;
@@ -170,21 +177,55 @@ router.post("/contact",async (req, res) => {
   const newContactUs = new ContactUs({
     name,
     email,
-    message 
+    message
   });
   await newContactUs.save();
 
 
-  contactEmail.sendMail(mail,async (error) => {
+  contactEmail.sendMail(mail, async (error) => {
     if (error) {
       res.json({ status: "ERROR" });
     } else {
-      
+
       res.json({ status: "Your request sent successfully." });
     }
   });
 });
 
- 
+router.post('/editProfile/:id', async (req, res) => {
+  const userId = req.params.id;
+  const {
+    username,
+    email,
+    firstName,
+    lastName,
+    phoneNumber,
+    address,
+    adharCardNumber,
+  } = req.body;
+
+  try {
+    const updatedProfile = await User.findByIdAndUpdate(userId, {
+      username,
+      email,
+      firstName,
+      lastName,
+      phoneNumber,
+      address,
+      adharCardNumber,
+    }, { new: true });
+
+    if (!updatedProfile) {
+      return res.status(404).json({ status: false, message: 'User not found.' });
+    }
+
+    return res.json({ status: true, message: 'User updated successfully.', data: updatedProfile });
+  }
+  catch (error) {
+    return res.status(500).json({ status: false, message: 'Failed to update User.', error: error.message });
+  }
+});
+
+
 export { router as UserRouter }
-  
+

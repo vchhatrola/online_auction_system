@@ -39,7 +39,7 @@ const ResetPassword = () => {
                         <div className="card-body">
                             <form onSubmit={handleSubmit}>
                                 <h2 className="text-center mb-4">New Password</h2>
-                                <div className="form-group">
+                                <div className="form-group  mb-2">
                                     <label htmlFor="password">Password</label>
                                     <input type="password" className="form-control" id="password" placeholder="Password"
                                         onChange={(e) => setPassword(e.target.value)} />

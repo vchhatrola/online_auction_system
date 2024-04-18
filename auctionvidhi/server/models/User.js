@@ -10,7 +10,8 @@ const UserSchema = new mongoose.Schema({
   phoneNumber: { type: String, required: true, unique: true },
   address: { type: String, required: true },
   registrationDate: { type: Date, default: Date.now },
-  adharCardNumber: { type: String, required: true, unique: true }
+  adharCardNumber: { type: String, required: true, unique: true },
+  role: { type: String, required: true, default: 'user' },
  
 });
 
