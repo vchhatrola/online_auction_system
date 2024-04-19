@@ -3,22 +3,15 @@ import '../App.css'
 import Axios from 'axios'
 import { useNavigate, useParams } from 'react-router-dom'
 
-
 const ResetPassword = () => {
     const [password, setPassword] = useState("")
     const { token } = useParams()
-
-
     const navigate = useNavigate()
-
     const handleSubmit = (e) => {
         e.preventDefault()
         Axios.post('http://localhost:3000/auth/reset-password/' + token, {
-
             password,
-
         }).then(response => {
-            //console.log(response)
             if (response.data.status) {
 
                 navigate('/login')
@@ -29,7 +22,6 @@ const ResetPassword = () => {
         })
 
     };
-
 
     return (
         <div className="container">
@@ -53,7 +45,4 @@ const ResetPassword = () => {
         </div>
     )
 }
-
-
-
 export default ResetPassword

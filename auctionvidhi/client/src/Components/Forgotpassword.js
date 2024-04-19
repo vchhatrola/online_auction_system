@@ -12,11 +12,8 @@ const Forgotpassword = () => {
     const handleSubmit = (e) => {
         e.preventDefault()
         Axios.post("http://localhost:3000/auth/forgot-password", {
-
             email,
-
         }).then(response => {
-            //console.log(response)
             if (response.data.status) {
                 alert("check your email for reset password link")
                 navigate('/login')
@@ -25,10 +22,7 @@ const Forgotpassword = () => {
         }).catch(err => {
             console.log(err)
         })
-
     };
-
-
     return (
         <div className="container">
             <div className="row justify-content-center">
@@ -40,9 +34,8 @@ const Forgotpassword = () => {
                                 <div className="form-group  mb-2">
                                     <label htmlFor="email">Email</label>
                                     <input type="text" className="form-control" id="email" placeholder="Email"
-                                     onChange={(e) => setEmail(e.target.value)} />
+                                        onChange={(e) => setEmail(e.target.value)} />
                                 </div>
-
                                 <button type='submit' className="btn btn-primary mt-3">Send</button>
                             </form>
                         </div>

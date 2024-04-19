@@ -27,7 +27,7 @@
 //   const handleBidClick = () => {
 //     let currentDate = new Date();
 //     let auctionDate = new Date(auction.auctionDate);
-    
+
 //     let currentDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate());
 //     let auctionDay = new Date(auctionDate.getFullYear(), auctionDate.getMonth(), auctionDate.getDate());
 
@@ -76,9 +76,9 @@
 //         <p style={{ fontWeight: 'bold', display: 'inline' }}>Auction Time:</p>
 //         <p style={{ display: 'inline' }}>{auction.auctionTime}</p>
 //       </div>
-     
+
 //         <button onClick={handleBidClick} style={{ textAlign: 'center', marginTop: '20px', width: '100px', padding: '10px 30px', backgroundColor: '#6495ED', border: '2px solid #ADD8E6', borderRadius: '10px', cursor: 'pointer' }}>Place Bid</button>
-     
+
 //     </div>
 //   );
 // }
@@ -142,41 +142,22 @@ function AuctionDescription() {
         <h2 className="card-title text-center mb-4">{auction.title}</h2>
         {/* <img src={auction.image} alt={auction.title} className="card-img-top mx-auto d-block" style={{ width: '400px', height: '300px', objectFit: 'contain' }} /> */}
         <div id="carouselExampleFade" className="carousel slide carousel-fade">
-  {/* <div className="carousel-inner" >
-    <div className="carousel-item active">
-      <img src={auction.image} style={{ width: '700px', height: '500px', objectFit: 'contain' }} alt="..."/>
-    </div>
-    <div className="carousel-item ">
-      <img src="https://cdn.luxatic.com/wp-content/uploads/2021/10/2021-BMW-7-Series-scaled.jpg"  style={{ width: '700px', height: '500px', objectFit: 'contain' }} alt="..."/>
-    </div>
-    <div className="carousel-item">
-      <img src="https://english.cdn.zeenews.com/sites/default/files/2022/01/12/1004731-mercedes-maybach-s-class.jpg"  style={{ width: '700px', height: '500px', objectFit: 'contain' }} alt="..."/>
-    </div> */}
-    <div className="carousel-inner">
-      {auction.imageData && auction.imageData.map((item, i)=>{
-        return (<div className={i == 0 ?`carousel-item active`:`carousel-item`}>
-        <img src={item.image} className="mx-auto" style={{width:"100%", height:"100%",  objectFit: 'contain' }} alt="..." />
-      </div>)
-      })}
-  
-  {/* <div className="carousel-item">
-    <img src="https://cdn.luxatic.com/wp-content/uploads/2021/10/2021-BMW-7-Series-scaled.jpg" className="mx-auto" style={{ width: '1100px', height: '500px', objectFit: 'contain' }} alt="..." />
-  </div>
-  <div className="carousel-item">
-    <img src="https://english.cdn.zeenews.com/sites/default/files/2022/01/12/1004731-mercedes-maybach-s-class.jpg" className="mx-auto" style={{ width: '1100px', height: '500px', objectFit: 'contain' }} alt="..." />
-  </div> */}
-
-
-  </div>
-  <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
-    <span className="carousel-control-prev-icon custom-icon" aria-hidden="true"></span>
-    <span className="visually-hidden">Previous</span>
-  </button>
-  <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
-    <span className="carousel-control-next-icon custom-icon " aria-hidden="true"></span>
-    <span className="visually-hidden">Next</span>
-  </button>
-</div>
+          <div className="carousel-inner">
+            {auction.imageData && auction.imageData.map((item, i) => {
+              return (<div className={i === 0 ? `carousel-item active` : `carousel-item`}>
+                <img src={item.image} className="mx-auto" style={{ width: "100%", height: "100%", objectFit: 'contain' }} alt="..." />
+              </div>)
+            })}
+          </div>
+          <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+            <span className="carousel-control-prev-icon custom-icon" aria-hidden="true"></span>
+            <span className="visually-hidden">Previous</span>
+          </button>
+          <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+            <span className="carousel-control-next-icon custom-icon " aria-hidden="true"></span>
+            <span className="visually-hidden">Next</span>
+          </button>
+        </div>
         <div className="card-body">
           <p className="card-text" style={{ fontWeight: 'bold', fontSize: '18px', color: '#212529' }}>Price: {auction.price}</p>
           <p className="card-text" style={{ fontWeight: 'bold', textAlign: 'left' }}>Description: {auction.description}</p>

@@ -26,10 +26,6 @@ const TermsAndConditions = () => {
     textDecoration: 'none',
   };
 
-  // const linkHoverStyle = {
-  //   textDecoration: 'underline',
-  // };
-
   return (
     <div style={containerStyle}>
       <h2 style={headingStyle}>Terms and Conditions</h2>
