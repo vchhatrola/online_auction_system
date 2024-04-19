@@ -1,10 +1,9 @@
 import mongoose from "mongoose";
 
 const AuctionBidSchema = new mongoose.Schema({
-  auctionId: { type: String, required: true },
-  userId: { type: String, required: true },
+  auctionId: { type: mongoose.Schema.Types.ObjectId, ref: 'AuctionTest', required: true },
+  userId:  { type: mongoose.Schema.Types.ObjectId, ref: 'Userdata', required: true },
   price: { type: String, required: true },
-  isSell: { type: Boolean, required: true }
  });
 
 const AuctionBidModal = mongoose.model("AuctionBid", AuctionBidSchema);

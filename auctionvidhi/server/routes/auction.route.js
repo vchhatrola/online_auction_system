@@ -3,6 +3,7 @@ const router = express.Router();
 import { AuctionTest } from '../models/AuctionDetail.modal.js'
 import { AuctionImage } from '../models/AuctionImage.model.js'
 import  { Mongoose }  from 'mongoose';
+import { AuctionBid } from '../models/AuctionBid.modal.js';
 
 router.post('/createAuction', async (req, res) => {
   console.log(req.body, "req..")
@@ -34,8 +35,33 @@ router.post('/createAuction', async (req, res) => {
 // GET route to fetch all auctions
 router.get('/getAuction', async (req, res) => {
   try {
-    const auctions = await AuctionTest.find();
+    const auctions = await AuctionTest.find({isSell:false});
     return res.json({ status: true, auctions: auctions });
+  } catch (error) {
+    return res.status(500).json({ status: false, message: 'Failed to fetch auctions.', error: error.message });
+  }
+});
+router.get('/getAuctionBid', async (req, res) => {
+  try {
+    const auctions = await AuctionTest.find({isSell:true});
+
+    const auctionBid = await AuctionBid.find().exec();
+       // Extract user IDs from posts
+       const acutionIds = auctionBid.map(item => item.auctionId);
+
+       // Then, find users corresponding to those IDs
+       const users = await AuctionTest.find({ _id: { $in: acutionIds } }).exec();
+   
+    console.log(users,"users")
+
+    const postsWithAuctionData = auctionBid.map(bid => {
+      const auctionDetail = users.find(user => user._id.equals(bid.auctionId));
+      return {
+        ...auctionDetail.toObject(), // Convert user Mongoose document to plain JavaScript object
+        auctionBidPrice: bid.price
+      };
+    });
+    return res.json({ status: true, auctions: postsWithAuctionData });
   } catch (error) {
     return res.status(500).json({ status: false, message: 'Failed to fetch auctions.', error: error.message });
   }

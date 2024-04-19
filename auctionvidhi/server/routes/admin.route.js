@@ -57,7 +57,13 @@ router.post('/auctionBid', async (req, res) => {
     userId,
     auctionId,
   });
+  const updatedAuction = await AuctionTest.findByIdAndUpdate(auctionId, {
+    isSell:true
+  }, { new: true });
 
+  if (!updatedAuction) {
+    return res.status(404).json({ status: false, message: 'Auction not found.' });
+  }
   await auctionBid.save();
   return res.json({ status: true, message: 'auctionBid is submited.' });
 });
