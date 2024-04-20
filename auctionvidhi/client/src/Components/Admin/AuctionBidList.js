@@ -42,7 +42,7 @@ const AuctionBidList = () => {
           <AdminSidebar />
         </div>
         <div className="col-lg-9 mb-5 mt-3">
-          <h1>Product List </h1>
+          <h1>Bid List </h1>
           <div className="table-responsive">
             <table className="table table-striped mb-4">
               <thead>

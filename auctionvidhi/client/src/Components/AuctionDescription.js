@@ -164,7 +164,7 @@ function AuctionDescription() {
           <p className="card-text" style={{ fontWeight: 'bold', textAlign: 'left' }}>Condition: {auction.condition}</p>
           <p className="card-text" style={{ fontWeight: 'bold', textAlign: 'left' }}>Car Model: {auction.model}</p>
           <p className="card-text" style={{ fontWeight: 'bold', textAlign: 'left' }}>Auction Date: {new Date(auction.auctionDate).toLocaleDateString()}</p>
-          <p className="card-text" style={{ fontWeight: 'bold', textAlign: 'left' }}>Auction Time: {auction.auctionTime}</p>
+          {/* <p className="card-text" style={{ fontWeight: 'bold', textAlign: 'left' }}>Auction Time: {auction.auctionTime}</p> */}
           <button onClick={handleBidClick} className="btn btn-primary mt-3 mx-auto d-block">Place Bid</button>
         </div>
       </div>
