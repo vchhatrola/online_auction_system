@@ -35,12 +35,12 @@ const ChatMain = () => {
               {!showChat ? (<form onSubmit={handleSubmit(joinRoom)}>
                 <h2 className="text-center mb-4">Join A Chat</h2>
                 <div className="form-group mb-2">
-                  <label htmlFor="username">Name</label>
+                  <label htmlFor="username">User name</label>
                   <input
                     type="text"
                     className="form-control"
                     id="username"
-                    placeholder="Enter your name"
+                    placeholder="Enter your User  name"
                     {...register("username", { required: true })}
                   />
                   {errors.username && <span className="text-danger">This field is required</span>}

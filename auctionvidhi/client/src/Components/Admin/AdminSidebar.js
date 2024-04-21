@@ -18,7 +18,7 @@ function AdminSidebar() {
           <Link to="/userList" className={`nav-link ${activeLink === '/userList' ? ' active' : ''}`}>User List</Link>
         </li>
         <li className="nav-item" onClick={() => handleLinkClick('/productList')} >
-          <Link to="/productList" className={`nav-link ${activeLink === '/productList' ? ' active' : ''}`}>Product List</Link>
+          <Link to="/productList" className={`nav-link ${activeLink === '/productList' ? ' active' : ''}`}>Auction List</Link>
         </li>
         <li className="nav-item" onClick={() => handleLinkClick('/auctionBidList')} >
           <Link to="/auctionBidList" className={`nav-link ${activeLink === '/auctionBidList' ? ' active' : ''}`}>Auction Bid List</Link>

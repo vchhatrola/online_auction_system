@@ -40,6 +40,7 @@ const Home = () => {
                     </div>
                 </div>
             </nav>
+            
         </div>
     )
 }
