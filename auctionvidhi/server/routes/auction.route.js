@@ -102,7 +102,7 @@ router.get('/getAuction/:id', async (req, res) => {
     const auction = await AuctionTest.aggregate(query);
 
     if (!auction) {
-      return res.status(404).json({ status: false, message: 'Auction not found.' });
+      return res.status(404).json({ status: false, message: 'Auction not found..' });
     }
     return res.json({ status: true, data: auction });
   } catch (error) {
