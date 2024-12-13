@@ -39,7 +39,7 @@ const Signup = () => {
                                     {errors.email && <span className="text-danger">This field is required</span>}
                                 </div>
                                 <div className="form-group mb-2">
-                                    <label htmlFor="password1">Password</label>
+                                    <label htmlFor="password1">Password.</label>
                                     <input type="password" className="form-control" id="password1" placeholder="Password"
                                         {...register("password", { required: true })} />
                                     {errors.password && <span className="text-danger">This field is required</span>}
